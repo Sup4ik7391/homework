@@ -11,19 +11,33 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Build APK with buildozer
-        uses: ArtemSBulgakov/buildozer-action@v1
+      - name: Set up Python
+        uses: actions/setup-python@v5
         with:
-          buildozer_version: stable
+          python-version: '3.12'
 
-      - name: Upload APK to artifact
+      - name: Install system dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y git zip unzip openjdk-17-jdk \
+            autoconf automake libtool libtool-bin pkg-config \
+            zlib1g-dev libncursesw5-dev cmake ninja-build \
+            build-essential ccache libssl-dev libffi-dev
+
+      - name: Install buildozer
+        run: pip install --upgrade buildozer cython
+
+      - name: Build APK
+        run: buildozer -v android debug
+
+      - name: Upload APK artifact
         uses: actions/upload-artifact@v4
         with:
           name: homework-apk
           path: bin/*.apk
 
       - name: Upload APK to release
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v2
         with:
           tag_name: v1.0.0
           files: bin/*.apk
