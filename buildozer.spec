@@ -16,6 +16,7 @@ android.minapi = 24
 android.archs = arm64-v8a,armeabi-v7a
 android.permissions = POST_NOTIFICATIONS,WAKE_LOCK,VIBRATE,FOREGROUND_SERVICE,SCHEDULE_EXACT_ALARM
 android.allow_backup = True
+android.accept_sdk_license = True
 
 fullscreen = 0
 log_level = 2
@@ -25,4 +26,3 @@ warn_all_root = False
 [buildozer]
 log_level = 2
 warn_on_root = 1
-android.accept_sdk_license = True
