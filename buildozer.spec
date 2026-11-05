@@ -1,0 +1,28 @@
+[app]
+title = Домашка
+package.name = homework
+package.domain = org.test
+source.dir = .
+source.include_exts = py
+version = 1.0.0
+requirements = python3,kivy==2.3.0,plyer,pyjnius
+orientation = portrait
+osx.python_version = 3
+
+services = Hw:service.py:foreground
+
+android.api = 31
+android.minapi = 24
+android.archs = arm64-v8a,armeabi-v7a
+android.permissions = POST_NOTIFICATIONS,WAKE_LOCK,VIBRATE,FOREGROUND_SERVICE,SCHEDULE_EXACT_ALARM
+android.allow_backup = True
+
+fullscreen = 0
+log_level = 2
+
+warn_all_root = False
+
+[buildozer]
+log_level = 2
+warn_on_root = 1
+android.accept_sdk_license = True
