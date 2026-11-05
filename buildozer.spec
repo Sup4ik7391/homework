@@ -5,7 +5,8 @@ package.domain = org.test
 source.dir = .
 source.include_exts = py
 version = 1.0.0
-requirements = python3,kivy==2.3.0,plyer,pyjnius
+requirements = python3,kivy==2.3.1,plyer,pyjnius
+p4a.python_version = 3.12
 orientation = portrait
 osx.python_version = 3
 
