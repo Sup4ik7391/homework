@@ -16,10 +16,16 @@ jobs:
         with:
           python-version: '3.12'
 
+      - name: Set up Java 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
       - name: Install system dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y git zip unzip openjdk-17-jdk \
+          sudo apt-get install -y git zip unzip \
             autoconf automake libtool libtool-bin pkg-config \
             zlib1g-dev libncursesw5-dev cmake ninja-build \
             build-essential ccache libssl-dev libffi-dev libltdl-dev
