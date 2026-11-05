@@ -5,7 +5,7 @@ package.domain = org.test
 source.dir = .
 source.include_exts = py
 version = 1.0.0
-requirements = python3,kivy==2.2.1,plyer,pyjnius
+requirements = python3,kivy==2.2.1,plyer,pyjnius==1.6.1
 p4a.branch = v2024.01.21
 p4a.python_version = 3.11
 orientation = portrait
