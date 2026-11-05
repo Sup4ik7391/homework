@@ -4,7 +4,7 @@ package.name = homework
 package.domain = org.test
 source.dir = .
 source.include_exts = py
-version = 1.0.0
+version = 1.1.0
 requirements = python3,kivy==2.2.1,plyer,pyjnius==1.6.1
 p4a.branch = v2024.01.21
 p4a.python_version = 3.11
@@ -14,8 +14,8 @@ osx.python_version = 3
 services = Hw:service.py:foreground
 
 android.api = 31
-android.minapi = 24
-android.archs = arm64-v8a,armeabi-v7a
+android.minapi = 21
+android.archs = arm64-v8a
 android.permissions = POST_NOTIFICATIONS,WAKE_LOCK,VIBRATE,FOREGROUND_SERVICE,SCHEDULE_EXACT_ALARM
 android.allow_backup = True
 android.accept_sdk_license = True
