@@ -35,19 +35,31 @@ jobs:
       - name: Install buildozer
         run: pip install --upgrade buildozer cython
 
-      - name: Build APK
-        run: buildozer -v android debug
+      - name: Build APK (release)
+        run: buildozer -v android release
+
+      - name: Sign APK
+        run: |
+          SDK="$HOME/.buildozer/android/platform/android-sdk"
+          BT=$(ls -d "$SDK"/build-tools/* | tail -1)
+          keytool -genkeypair -v -keystore key.hw -alias hw \
+            -keypass 123456 -storepass 123456 -keyalg RSA -keysize 2048 \
+            -validity 10000 -dname "CN=Homework, OU=dev, O=dev, C=RU"
+          UNSIGNED=$(ls bin/*release-unsigned*.apk)
+          "$BT/zipalign" -f 4 "$UNSIGNED" bin/hw-aligned.apk
+          "$BT/apksigner" sign --ks key.hw --ks-pass pass:123456 \
+            --key-pass pass:123456 --out bin/homework-release.apk bin/hw-aligned.apk
+          "$BT/apksigner" verify -v bin/homework-release.apk > verify.txt
+          head -12 verify.txt
 
       - name: Upload APK artifact
         uses: actions/upload-artifact@v4
         with:
           name: homework-apk
-          path: bin/*.apk
+          path: bin/homework-release.apk
 
       - name: Upload APK to release
         uses: softprops/action-gh-release@v2
         with:
           tag_name: v${{ github.run_number }}
-          files: bin/*.apk
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          files: bin/homework-release.apk
