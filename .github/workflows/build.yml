@@ -59,7 +59,8 @@ jobs:
           keytool -genkeypair -v -keystore key.hw -alias hw \
             -keypass 123456 -storepass 123456 -keyalg RSA -keysize 2048 \
             -validity 10000 -dname "CN=Homework, OU=dev, O=dev, C=RU"
-          UNSIGNED=$(ls bin/*.apk | grep -i release | head -1)
+          UNSIGNED=$(ls bin/*.apk 2>/dev/null | grep -i release | head -1)
+          if [ -z "$UNSIGNED" ]; then UNSIGNED=$(ls bin/*.apk | head -1); fi
           echo "found: $UNSIGNED"
           ls bin/
           "$BT/zipalign" -f 4 "$UNSIGNED" bin/hw-aligned.apk
