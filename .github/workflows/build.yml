@@ -38,6 +38,20 @@ jobs:
       - name: Build APK (release)
         run: buildozer -v android release
 
+      - name: Force APK build via gradle
+        run: |
+          DIST=$(ls -d .buildozer/android/platform/build-*/dists/homework)
+          echo "$DIST"
+          cd "$DIST"
+          ./gradlew assembleRelease --no-daemon || true
+          ls build/outputs/apk/release/ || true
+          if ls build/outputs/apk/release/*.apk >/dev/null 2>&1; then
+            cp build/outputs/apk/release/*.apk "$GITHUB_WORKSPACE/bin/homework-unsigned.apk"
+          else
+            cp "$DIST"/../../../../bin/*.apk "$GITHUB_WORKSPACE/bin/" 2>/dev/null || true
+          fi
+          ls -l "$GITHUB_WORKSPACE/bin/"
+
       - name: Sign APK
         run: |
           SDK="$HOME/.buildozer/android/platform/android-sdk"
