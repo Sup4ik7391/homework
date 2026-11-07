@@ -291,7 +291,7 @@ class MainApp(App):
     def start_service(self):
         from jnius import autoclass
         PythonActivity = autoclass('org.kivy.android.PythonActivity')
-        ServiceHw = autoclass('org.test.homework.ServiceHw')
+        ServiceHw = autoclass('dev.sup4ik.homework.ServiceHw')
         ServiceHw.start(PythonActivity.mActivity, '')
 
     def load_tasks(self):

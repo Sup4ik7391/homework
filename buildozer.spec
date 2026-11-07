@@ -1,7 +1,7 @@
 [app]
 title = Домашка
 package.name = homework
-package.domain = org.test
+package.domain = dev.sup4ik
 source.dir = .
 source.include_exts = py
 version = 1.1.0
